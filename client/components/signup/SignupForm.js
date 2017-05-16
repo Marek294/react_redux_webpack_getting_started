@@ -23,7 +23,7 @@ class SignupForm extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        this.props.userSignupRequest(this.state);
     }
 
     render() {
@@ -84,7 +84,7 @@ class SignupForm extends React.Component {
                         onChange={this.onChange.bind(this)}
                         value={this.state.timezone}
                     >
-                        <option value="" disabled>Choose Your Timezon</option>
+                        <option value="" disabled>Choose Your Timezone</option>
                         {options}
                     </select>
                 </div>
@@ -98,5 +98,9 @@ class SignupForm extends React.Component {
         );
     }
 }
+
+SignupForm.propTypes = {
+    userSignupRequest: React.PropTypes.func.isRequired
+};
 
 export default SignupForm;
