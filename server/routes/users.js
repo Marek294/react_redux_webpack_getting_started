@@ -14,8 +14,10 @@ function validateInput(data, otherValidations) {
     return User.query( { where: { username: data.username },
                         orWhere: { email: data.email }})
         .fetch().then(user => {
-            if(user.get('username') === data.username ) errors.username = 'There is user with such username';
-            if(user.get('email') === data.email) errors.email = 'There is user with such email';
+            if(user) {
+                if (user.get('username') === data.username) errors.username = 'There is user with such username';
+                if (user.get('email') === data.email) errors.email = 'There is user with such email';
+            }
 
             return { errors, isValid: isEmpty(errors)};
     });
